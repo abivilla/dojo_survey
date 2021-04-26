@@ -12,10 +12,13 @@ def result(request):
         location = request.POST["dojo_loc"]
         language = request.POST["fav_lang"]
         comment = request.POST["comment"]
-        context = {
-            "name": name,
-            "location": location,
-            "language": language,
-            "comment": comment
-        }
-        return render(request,"result.html", context)
+
+        request.session["name"] = name
+        request.session["location"] = location
+        request.session["language"] = language
+        request.session["comment"] = comment
+    return redirect("/display")
+
+def display(request):
+    
+    return render(request,"result.html")
